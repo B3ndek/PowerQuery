@@ -1,1 +1,10 @@
+The fix to this was as follows:
 
+I had to go into the Power Query Editor and then into the Advanced Editor. On the following line, add the code in bold.
+
+ #"Imported Excel Workbook" = Excel.Workbook(#"MYWORKBOOK", [DelayTypes = true, InferSheetDimensions = true])
+
+The InferSheetDimensions will go off the actual xlsx file and not the metadata which is likely what is changing and causing the error.
+
+## Working example
+Źródło = Excel.Workbook(File.Contents("U:\SPECIAL\Raporty_WLKP\Source\user_data\Customer_SKK.xlsx"), [DelayTypes = true, InferSheetDimensions = true])
